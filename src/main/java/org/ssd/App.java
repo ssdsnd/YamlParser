@@ -53,7 +53,15 @@ public class App
     }
 
     private static void printStruct(Object obj) {
+        Map<String, Object> map = getMap(obj);
+        List<?> list = getList(getMap(getMap(map.get("Main")).get("subtags")).get("Tag1"));
+        printYamlObj(list);
+        System.out.println("Tag1 list size: " + list.size());
         
+        list = getList(getMap(getMap(map.get("Main")).get("subtags")).get("Tag2"));
+        printYamlObj(list);
+        System.out.println("Tag2 list size: " + list.size());
+
     }
 
     public static void main( String[] args ) throws IOException {
@@ -61,7 +69,7 @@ public class App
 
         File file = new File("sample.yaml");
         InputStream inStream = new FileInputStream(file);
-        printYamlObj(parserYaml(inStream));
+        //printYamlObj(parserYaml(inStream));
         printStruct(parserYaml(inStream));
         inStream.close();
     }

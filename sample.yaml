@@ -8,3 +8,28 @@ Main:
             - [ [IN1, IN2 ], [ [RD1, RD2], [ SD1, SD2], RC, RT ]]
             - [ ["IN1A", "IN2A"], [ [RD1A, RD2A], [SD1A, SD2A], RCA, RTA ]]
             - [ ["IN1B", "IN2B"], [ [RD1B, RD2B], [SD1B, SD2B], RCB, RTB ]]
+        Tag2:
+            - Input:
+                IN1: IN1C
+                IN2: IN2C
+              Output:
+                RD:
+                    RD1: RD1C
+                    RD2: RD2C
+                SD:
+                    SD1: SD1C
+                    SD2: SD2C
+                RC: RCC
+                RT: RTC
+            - Input:
+                IN1: IN1C
+                IN2: IN2C
+              Output:
+                RD:
+                    RD1: RD1C
+                    RD2: RD2C
+                SD:
+                    SD1: SD1C
+                    SD2: SD2C
+                RC: RCC
+                RT: RTC
