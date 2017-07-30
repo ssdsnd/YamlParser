@@ -1,3 +1,10 @@
 List:
 - name
 - rollnumber
+
+Main:
+    subtags:
+        Tag1:
+            - [ [IN1, IN2 ], [ [RD1, RD2], [ SD1, SD2], RC, RT ]]
+            - [ ["IN1A", "IN2A"], [ [RD1A, RD2A], [SD1A, SD2A], RCA, RTA ]]
+            - [ ["IN1B", "IN2B"], [ [RD1B, RD2B], [SD1B, SD2B], RCB, RTB ]]

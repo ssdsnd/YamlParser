@@ -17,40 +17,52 @@ import org.yaml.snakeyaml.Yaml;
  */
 public class App 
 {
-	private static void parserYaml(InputStream inputStream) {
-		Yaml yaml =  new Yaml();
-		printYamlObj(yaml.load(inputStream));
-	}
+    private static Object parserYaml(InputStream inputStream) {
+        Yaml yaml =  new Yaml();
+        return yaml.load(inputStream);
+    }
 
-	static void printYamlObj(Object obj) {
-		if (obj instanceof Map) {
-			Map<String, Object> map = (Map<String, Object>) obj;
-			for (Map.Entry<String, Object> entry : map.entrySet()) {
-				System.out.print(entry.getKey() + "={" );
-				printYamlObj(entry.getValue());
-				System.out.println("}");
-			}
-			
-		} else if (obj instanceof List) {
-			List<?> list = (List<?>) obj;
-			System.out.print("[");
-			for (Object o : list) {
-				printYamlObj(o);
-				System.out.print(", ");
-			}
-			System.out.println("]");
-		} else {
-			System.out.print(Objects.toString(obj));
-		}
-	}
-	
-    public static void main( String[] args ) throws IOException
-    {
-        System.out.println( "Hello World!" );
+    private static void printYamlObj(Object obj) {
+        if (obj instanceof Map) {
+            Map<String, Object> map = getMap(obj);
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                System.out.print(entry.getKey() + "={" );
+                printYamlObj(entry.getValue());
+                System.out.println("}");
+            }
+        } else if (obj instanceof List) {
+            List<?> list = getList(obj);
+            System.out.print("[");
+            for (Object o : list) {
+                printYamlObj(o);
+                System.out.print(", ");
+            }
+            System.out.println("]");
+        } else {
+            System.out.print(Objects.toString(obj));
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Map<String, Object> getMap(Object obj) {
+        return (Map<String, Object>) obj;
+    }
+
+    private static List<?> getList(Object obj) {
+        return (List<?>) obj;
+    }
+
+    private static void printStruct(Object obj) {
         
+    }
+
+    public static void main( String[] args ) throws IOException {
+        System.out.println( "Hello World!" );
+
         File file = new File("sample.yaml");
         InputStream inStream = new FileInputStream(file);
-        parserYaml(inStream);
+        printYamlObj(parserYaml(inStream));
+        printStruct(parserYaml(inStream));
         inStream.close();
     }
 }
