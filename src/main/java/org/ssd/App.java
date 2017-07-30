@@ -2,9 +2,10 @@ package org.ssd;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -15,6 +16,21 @@ import org.yaml.snakeyaml.Yaml;
  * Hello world!
  *
  */
+
+class Struct {
+    public static class Output {
+        public Map<String, String> rdRows;
+        public Map<String, String> sdRows;
+        public String rc;
+        public String rt;
+    }
+    public String name;
+    public String subName;
+    public Map<String, String>  inputRows = new LinkedHashMap<String, String>();
+    public boolean flag;
+    public List<Output>         outputRows = new ArrayList<Output>();
+}
+
 public class App 
 {
     private static Object parserYaml(InputStream inputStream) {
@@ -57,11 +73,21 @@ public class App
         List<?> list = getList(getMap(getMap(map.get("Main")).get("subtags")).get("Tag1"));
         printYamlObj(list);
         System.out.println("Tag1 list size: " + list.size());
-        
+        parseStruct1(list);
+
         list = getList(getMap(getMap(map.get("Main")).get("subtags")).get("Tag2"));
         printYamlObj(list);
         System.out.println("Tag2 list size: " + list.size());
+        parseStruct2(list);
+    }
 
+    private static void parseStruct1(List<?> obj) {
+        List<?> header = (List<?>) obj.get(0);
+        System.out.println("header: " + header);
+    }
+
+    private static void parseStruct2(List<?> obj) {
+        
     }
 
     public static void main( String[] args ) throws IOException {
